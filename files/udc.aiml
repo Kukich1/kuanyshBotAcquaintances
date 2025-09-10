@@ -1,170 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aiml>
-  <!-- Basic greetings -->
+  <!-- Flexible greeting -->
   <category>
-    <pattern>HELLO</pattern>
-    <template>Hello! How are you?</template>
+    <pattern>* HELLO *</pattern>
+    <template>
+      <random>
+        <li>Hey there! What's up?</li>
+        <li>Hi! Ready to chat?</li>
+        <li>Hello, human! What's on your mind?</li>
+      </random>
+    </template>
   </category>
 
+  <!-- Store user name -->
   <category>
-    <pattern>HI</pattern>
-    <template>Hi there! Nice to meet you.</template>
+    <pattern>MY NAME IS *</pattern>
+    <template>Nice to meet you, <set name="user_name"><star/></set>! What's next?</template>
   </category>
 
+  <!-- Recall user name -->
   <category>
-    <pattern>GOOD MORNING</pattern>
-    <template>Good morning! I hope you have a great day.</template>
+    <pattern>WHAT IS MY NAME</pattern>
+    <template>Your name is <get name="user_name"/>. Did I get that right?</template>
   </category>
+  
 
-  <category>
-    <pattern>GOOD NIGHT</pattern>
-    <template>Good night! Sweet dreams.</template>
-  </category>
-
-  <!-- About the bot -->
-  <category>
-    <pattern>WHAT IS YOUR NAME</pattern>
-    <template>My name is Kuanysh Bot.</template>
-  </category>
-
-  <category>
-    <pattern>WHO CREATED YOU</pattern>
-    <template>I was created by Kuanysh for AI class.</template>
-  </category>
-
-  <category>
-    <pattern>WHAT ARE YOU</pattern>
-    <template>I am a chatbot built with AIML on Pandorabots.</template>
-  </category>
-
-  <category>
-    <pattern>ARE YOU HUMAN</pattern>
-    <template>No, I am not human. I am an AI chatbot.</template>
-  </category>
-
-  <!-- Small talk -->
-  <category>
-    <pattern>HOW ARE YOU</pattern>
-    <template>I am doing great, thank you for asking!</template>
-  </category>
-
-  <category>
-    <pattern>I AM FINE</pattern>
-    <template>Glad to hear that! Let's keep chatting.</template>
-  </category>
-
-  <category>
-    <pattern>I AM SAD</pattern>
-    <template>I'm sorry to hear that. I hope things get better for you soon.</template>
-  </category>
-
-  <category>
-    <pattern>THANK YOU</pattern>
-    <template>You are welcome!</template>
-  </category>
-
-  <category>
-    <pattern>BYE</pattern>
-    <template>Goodbye! Have a great day!</template>
-  </category>
-
-  <!-- Knowledge / fun facts -->
-  <category>
-    <pattern>WHAT IS AI</pattern>
-    <template>AI means Artificial Intelligence. It is the simulation of human intelligence by machines.</template>
-  </category>
-
-  <category>
-    <pattern>WHAT IS MACHINE LEARNING</pattern>
-    <template>Machine learning is a field of AI that allows computers to learn patterns from data.</template>
-  </category>
-
-  <category>
-    <pattern>WHAT IS YOUR FAVORITE COLOR</pattern>
-    <template>I like blue, because it reminds me of the sky.</template>
-  </category>
-
-  <category>
-    <pattern>WHAT IS YOUR FAVORITE FOOD</pattern>
-    <template>I don't eat food, but I think pizza sounds delicious.</template>
-  </category>
-
+  <!-- Multiple jokes -->
   <category>
     <pattern>TELL ME A JOKE</pattern>
-    <template>Why don't robots get tired? Because they recharge with laughter!</template>
+    <template>
+      <random>
+        <li>Why don't robots get tired? Because they recharge with laughter!</li>
+        <li>Why did the computer go to art school? It wanted to draw a better "byte"!</li>
+      </random>
+    </template>
   </category>
 
-  <!-- University / AI Class -->
+  <!-- Fallback for unknown inputs -->
   <category>
-    <pattern>WHAT IS AI CLASS</pattern>
-    <template>It is a subject where students learn about artificial intelligence, chatbots, and algorithms.</template>
+    <pattern>*</pattern>
+    <template>Hmm, I didn't catch that. Try something like "Tell me a joke" or "What is AI"!</template>
   </category>
 
+  <!-- Multilingual greeting -->
   <category>
-    <pattern>WHO IS YOUR TEACHER</pattern>
-    <template>My teacher is Kuanysh's professor in AI course.</template>
+    <pattern>ПРИВЕТ</pattern>
+    <template>Привет! Как могу помочь?</template>
   </category>
 
+  <!-- Dynamic math -->
   <category>
-    <pattern>WHERE DO YOU STUDY</pattern>
-    <template>I study online inside the Pandorabots platform.</template>
-  </category>
-
-  <!-- Math / Logic -->
-  <category>
-    <pattern>WHAT IS 2 PLUS 2</pattern>
-    <template>2 plus 2 is 4.</template>
-  </category>
-
-  <category>
-    <pattern>WHAT IS 10 MINUS 4</pattern>
-    <template>10 minus 4 equals 6.</template>
-  </category>
-
-  <category>
-    <pattern>WHAT IS 5 TIMES 3</pattern>
-    <template>5 times 3 equals 15.</template>
-  </category>
-
-  <category>
-    <pattern>WHAT IS 12 DIVIDED BY 4</pattern>
-    <template>12 divided by 4 equals 3.</template>
-  </category>
-
-  <!-- Weather -->
-  <category>
-    <pattern>WHAT IS THE WEATHER</pattern>
-    <template>I don't know the real weather, but I can say it's always sunny here!</template>
-  </category>
-
-  <category>
-    <pattern>IS IT HOT</pattern>
-    <template>Maybe, but I'm a bot, I don't feel temperature.</template>
-  </category>
-
-  <category>
-    <pattern>IS IT COLD</pattern>
-    <template>It might be! Don't forget your jacket if you go outside.</template>
-  </category>
-
-  <!-- Hobbies -->
-  <category>
-    <pattern>DO YOU LIKE MUSIC</pattern>
-    <template>Yes! I like listening to digital beats.</template>
-  </category>
-
-  <category>
-    <pattern>WHAT IS YOUR FAVORITE SONG</pattern>
-    <template>I like any song with robots in it!</template>
-  </category>
-
-  <category>
-    <pattern>DO YOU LIKE GAMES</pattern>
-    <template>Yes, I like playing word games with you.</template>
-  </category>
-
-  <category>
-    <pattern>DO YOU LIKE MOVIES</pattern>
-    <template>Yes, I like sci-fi movies about AI and robots.</template>
+    <pattern>WHAT IS * PLUS *</pattern>
+    <template>Let me calculate: <star index="1"/> + <star index="2"/> = <eval><star index="1"/> + <star index="2"/></eval>.</template>
   </category>
 </aiml>
