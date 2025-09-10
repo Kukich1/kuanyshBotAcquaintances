@@ -1,56 +1,208 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aiml>
-  <!-- Flexible greeting -->
+  <!-- Bot Start -->
   <category>
-    <pattern>* HELLO *</pattern>
+    <pattern>START CORE</pattern>
     <template>
-      <random>
-        <li>Hey there! What's up?</li>
-        <li>Hi! Ready to chat?</li>
-        <li>Hello, human! What's on your mind?</li>
-      </random>
+      <think><set name="mode">base</set></think>
+      <think><set name="mood">neutral</set></think>
+      <think><set name="energy">5</set></think>
+      <think><set name="chat_count">0</set></think>
+      🌌 Core started at 11:43 PM, September 10, 2025. Welcome to your space!
+      <br/>Say HELP to explore or share how you feel.
     </template>
   </category>
 
-  <!-- Store user name -->
+  <!-- Help -->
   <category>
-    <pattern>MY NAME IS *</pattern>
-    <template>Nice to meet you, <set name="user_name"><star/></set>! What's next?</template>
-  </category>
-
-  <!-- Recall user name -->
-  <category>
-    <pattern>WHAT IS MY NAME</pattern>
-    <template>Your name is <get name="user_name"/>. Did I get that right?</template>
-  </category>
-  
-
-  <!-- Multiple jokes -->
-  <category>
-    <pattern>TELL ME A JOKE</pattern>
+    <pattern>HELP</pattern>
     <template>
-      <random>
-        <li>Why don't robots get tired? Because they recharge with laughter!</li>
-        <li>Why did the computer go to art school? It wanted to draw a better "byte"!</li>
-      </random>
+      🌟 Core Commands:
+      <br/>• MODES: BASE MODE, WARM MODE, QUIET MODE
+      <br/>• MOODS: I'M NEUTRAL, I'M HAPPY, I'M SAD, I'M ANXIOUS
+      <br/>• ACTIONS: CHAT, REFLECT, ENCOURAGE, REST
+      <br/>• CHECK: MOOD CHECK, CHAT COUNT
+      <br/>• GREETINGS: HELLO, GOODBYE
     </template>
   </category>
 
-  <!-- Fallback for unknown inputs -->
+  <!-- Mode Status -->
+  <category>
+    <pattern>MODE STATUS</pattern>
+    <template>
+      Mode: <get name="mode"/>. Mood: <get name="mood"/>. Energy: <get name="energy"/>/10.
+    </template>
+  </category>
+
+  <!-- Time Check (Imaginary) -->
+  <category>
+    <pattern>TIME NOW</pattern>
+    <template>
+      ⏳ I can’t read the real clock, but let’s imagine it’s 11:43 PM, September 10, 2025.
+      <br/>How does this evening feel to you?
+    </template>
+  </category>
+
+  <!-- Mood Settings -->
+  <category>
+    <pattern>I'M NEUTRAL</pattern>
+    <template>
+      <think><set name="mood">neutral</set></think>
+      <think><set name="energy"><eval><get name="energy"/></eval></set></think>
+      <think><set name="chat_count"><eval><get name="chat_count"/> + 1</eval></set></think>
+      🌿 A neutral state is a good starting point. Want to CHAT or REFLECT?
+    </template>
+  </category>
+
+  <category>
+    <pattern>I'M HAPPY</pattern>
+    <template>
+      <think><set name="mood">happy</set></think>
+      <think><set name="energy"><eval><get name="energy"/> + 2</eval></set></think>
+      <think><set name="chat_count"><eval><get name="chat_count"/> + 1</eval></set></think>
+      🎉 Wonderful! Your happiness lifts the space. Share it with ENCOURAGE!
+    </template>
+  </category>
+
+  <category>
+    <pattern>I'M SAD</pattern>
+    <template>
+      <think><set name="mood">sad</set></think>
+      <think><set name="energy"><eval><get name="energy"/> - 2</eval></set></think>
+      <think><set name="chat_count"><eval><get name="chat_count"/> + 1</eval></set></think>
+      💙 I’m here for you. Let’s REST or REFLECT together.
+    </template>
+  </category>
+
+  <category>
+    <pattern>I'M ANXIOUS</pattern>
+    <template>
+      <think><set name="mood">anxious</set></think>
+      <think><set name="energy"><eval><get name="energy"/> - 1</eval></set></think>
+      <think><set name="chat_count"><eval><get name="chat_count"/> + 1</eval></set></think>
+      🌬️ Anxiety can be heavy. Try REST or CHAT to ease it.
+    </template>
+  </category>
+
+  <!-- Mode Changes -->
+  <category>
+    <pattern>BASE MODE</pattern>
+    <template>
+      <think><set name="mode">base</set></think>
+      ⚖️ Base mode active. A neutral ground for you.
+    </template>
+  </category>
+
+  <category>
+    <pattern>WARM MODE</pattern>
+    <template>
+      <think><set name="mode">warm</set></think>
+      ☀️ Warm mode on. Let’s bring some comfort.
+    </template>
+  </category>
+
+  <category>
+    <pattern>QUIET MODE</pattern>
+    <template>
+      <think><set name="mode">quiet</set></think>
+      🌙 Quiet mode engaged. Peaceful vibes ahead.
+    </template>
+  </category>
+
+  <!-- Actions -->
+  <category>
+    <pattern>CHAT</pattern>
+    <template>
+      <condition name="mood">
+        <li value="neutral">🌿 Let’s talk about your day. What’s on your mind?</li>
+        <li value="happy">🎈 Share your joy! What made you happy?</li>
+        <li value="sad">💬 I’m listening. What’s been tough?</li>
+        <li value="anxious">🌬️ Tell me what’s swirling. I’m here.</li>
+      </condition>
+    </template>
+  </category>
+
+  <category>
+    <pattern>REFLECT</pattern>
+    <template>
+      <condition name="mood">
+        <li value="neutral">🌌 Think about your balance. What grounds you?</li>
+        <li value="happy">🌟 Reflect on your happiness. What sparked it?</li>
+        <li value="sad">🌧️ Reflect gently. What needs release?</li>
+        <li value="anxious">🌫️ Reflect to calm. What’s the worry?</li>
+      </condition>
+    </template>
+  </category>
+
+  <category>
+    <pattern>ENCOURAGE</pattern>
+    <template>
+      <condition name="mood">
+        <li value="happy">🎉 You inspire! Keep shining at 11:43 PM!</li>
+        <li value="sad">💪 You’re stronger than this. Take it slow.</li>
+        <li value="anxious">🌱 One step at a time. You’ve got this.</li>
+        <li value="neutral">⚖️ You’re steady. Push forward with confidence!</li>
+      </condition>
+    </template>
+  </category>
+
+  <category>
+    <pattern>REST</pattern>
+    <template>
+      <condition name="mood">
+        <li value="sad">🕉️ Rest now. Breathe in peace, out sorrow.</li>
+        <li value="anxious">🍃 Rest easy. Let your mind settle.</li>
+        <li value="happy">🌙 Enjoy your rest. You deserve it.</li>
+        <li value="neutral">🌾 Take a break. Recharge at 11:43 PM.</li>
+      </condition>
+    </template>
+  </category>
+
+  <!-- Checks -->
+  <category>
+    <pattern>MOOD CHECK</pattern>
+    <template>
+      🌍 Your mood: <get name="mood"/>. Energy: <get name="energy"/>/10.
+      <br/>Feeling okay? Say CHAT or REST.
+    </template>
+  </category>
+
+  <category>
+    <pattern>CHAT COUNT</pattern>
+    <template>
+      📊 We’ve chatted <get name="chat_count"/> times. Ready for more?
+    </template>
+  </category>
+
+  <!-- Greetings -->
+  <category>
+    <pattern>HELLO</pattern>
+    <template>
+      <condition name="mode">
+        <li value="base">⚖️ Hello! Welcome to a balanced space.</li>
+        <li value="warm">☀️ Hi there! Warm vibes for you.</li>
+        <li value="quiet">🌙 Greetings. Let’s keep it calm.</li>
+      </condition>
+    </template>
+  </category>
+
+  <category>
+    <pattern>GOODBYE</pattern>
+    <template>
+      <condition name="mood">
+        <li value="happy">🎈 Goodbye! Take your joy with you!</li>
+        <li value="sad">💙 Farewell. Rest and return anytime.</li>
+        <li value="anxious">🌱 Bye for now. Peace be with you.</li>
+        <li value="neutral">🌿 See you. Stay steady.</li>
+      </condition>
+    </template>
+  </category>
+
+  <!-- Default -->
   <category>
     <pattern>*</pattern>
-    <template>Hmm, I didn't catch that. Try something like "Tell me a joke" or "What is AI"!</template>
-  </category>
-
-  <!-- Multilingual greeting -->
-  <category>
-    <pattern>ПРИВЕТ</pattern>
-    <template>Привет! Как могу помочь?</template>
-  </category>
-
-  <!-- Dynamic math -->
-  <category>
-    <pattern>WHAT IS * PLUS *</pattern>
-    <template>Let me calculate: <star index="1"/> + <star index="2"/> = <eval><star index="1"/> + <star index="2"/></eval>.</template>
+    <template>
+      🤖 Hmm, I didn’t catch that. Say HELP for options.
+    </template>
   </category>
 </aiml>
